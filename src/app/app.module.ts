@@ -12,8 +12,6 @@ import { StoreFirstGuard } from './storeFirst.guard';
 
 @NgModule({
   declarations: [AppComponent],
-  providers: [StoreFirstGuard],
-  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     StoreModule,
@@ -33,8 +31,16 @@ import { StoreFirstGuard } from './storeFirst.guard';
         component: CheckoutComponent,
         canActivate: [StoreFirstGuard],
       },
+      {
+        path: 'admin',
+        loadChildren: () =>
+          import('./admin/admin.module').then((m) => m.AdminModule),
+        canActivate: [StoreFirstGuard],
+      },
       { path: '**', redirectTo: '/store' },
     ]),
   ],
+  providers: [StoreFirstGuard],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
