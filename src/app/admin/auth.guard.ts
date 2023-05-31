@@ -13,7 +13,7 @@ export class AuthGuard {
     state: RouterStateSnapshot
   ): boolean {
     if (!this.auth.authenticated) {
-      this.router.navigateByUrl('/admin/auth');
+      this.router.navigateByUrl('/admin/auth').catch((err) => console.log(err));
       return false;
     }
     return true;
